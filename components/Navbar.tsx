@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 
 const NavbarContainer = styled.div`
   top: 0;
@@ -16,7 +17,11 @@ const Logo = styled.img`
 const Navbar = () => {
   return (
     <NavbarContainer>
-      <Logo src="/logo.png" />
+      <Link href="/">
+        <a>
+          <Logo src="/logo.png" />
+        </a>
+      </Link>
     </NavbarContainer>
   )
 }
