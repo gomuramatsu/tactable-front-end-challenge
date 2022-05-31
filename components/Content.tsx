@@ -1,13 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import {
   useQuery,
-  useQueryClient,
 } from 'react-query'
 import { Stack } from '@chakra-ui/react'
-import Post from './Post'
 import styled from 'styled-components'
 import { fetchPosts } from '../utils/api/posts'
-import { PostContext } from '../utils/state/Context'
+import { useGlobalContext } from  '../utils/state/Context'
 import Pagination from './Pagination'
 import FullPost from './FullPost/FullPost'
 import Link from 'next/link'
@@ -18,14 +16,14 @@ const ContentContainer = styled.div`
 `;
 
 const Content = () => {
-  const [state, setState] = useContext(PostContext);
+  const { posts, setPosts, page, setPage } = useGlobalContext();
 
-  const queryClient = useQueryClient()
   const { data, status } = useQuery('fetchPosts', fetchPosts);
 
   useEffect(() => {
     if (data) {
-      setState({...state, posts: data, page: 0});
+      setPosts(data);
+      setPage(0);
     }
   }, [data]);
 
@@ -42,9 +40,9 @@ const Content = () => {
       {status === 'success' && (
         <>
           <Stack direction='column'>
-            {state.posts && state.posts.map((post:any, index: number) => {
-              if ( index >= state.page * 5 && index < (state.page + 1) * 5) {
-                return <Link href={"/" + post.id}>
+            {posts && posts.map((post:any, index: number) => {
+              if ( index >= page * 5 && index < (page + 1) * 5) {
+                return <Link href={"/" + post.id} key={post.id}>
                 <a><FullPost
                   key={post.id}
                   post={post}
@@ -52,7 +50,6 @@ const Content = () => {
                 </a></Link>
               }
             })}
-            hello
           </Stack>
           <Pagination />
         </>

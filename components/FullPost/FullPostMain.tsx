@@ -1,11 +1,11 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useQuery,
 } from 'react-query'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import { fetchPosts } from '../../utils/api/posts'
-import { PostContext } from '../../utils/state/Context'
+import { useGlobalContext } from  '../../utils/state/Context'
 import FullPost from './FullPost'
 import Comments from './Comments'
 
@@ -17,26 +17,26 @@ const MainContainer = styled.div`
 const FullPostMain = () => {
   const router = useRouter();
 
-  const [state, setState] = useContext(PostContext);
+  const { posts, setPosts } = useGlobalContext();
   const [post, setPost] = useState<any>(null);
 
   const { data, status } = useQuery('fetchPosts', fetchPosts);
 
   useEffect(() => {
     if (data) {
-      setState({...state, posts: data});
+      setPosts(data);
     }
   }, [data]);
-
+  
   useEffect(() => {
-    if (state.posts) {
-      for (let i = 0; i < state.posts.length; i++) {
-        if (state.posts[i].id === router.query.postId) {
-          setPost(state.posts[i]);
+    if (posts) {
+      for (let i = 0; i < posts.length; i++) {
+        if (posts[i].id === router.query.postId) {
+          setPost(posts[i]);
         }
       }
     }
-  }, [state]);
+  }, [posts]);
 
   return (
     <>

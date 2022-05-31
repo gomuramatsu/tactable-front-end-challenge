@@ -1,4 +1,4 @@
-import { Heading, Text } from '@chakra-ui/react'
+import { Heading, propNames, Text } from '@chakra-ui/react'
 import styled from 'styled-components'
 
 const PostContainer = styled.div`
@@ -7,6 +7,10 @@ const PostContainer = styled.div`
   padding: 24px 36px 24px 36px;
   background-color: white;
   margin: 12px 0 12px 0;
+
+  &:hover {
+    border: 1px solid black;
+  }
 `;
 
 const AuthorImage = styled.img`
@@ -38,7 +42,7 @@ const FullPost = ({post} : any) => {
           <AuthorListContainer>
           {post.authors.map((author : any) => {
             return (
-              <AuthorContainer>
+              <AuthorContainer key={author.id}>
                 <AuthorImage src={author.avatar} />
                 <p>{author.name}</p>
               </AuthorContainer>

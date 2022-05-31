@@ -42,7 +42,6 @@ const Comments = ({post} : any) => {
             </>
             : null
           }
-          
         </CommentContainers>
       : null}
     </>
