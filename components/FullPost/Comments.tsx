@@ -31,7 +31,7 @@ const Comments = ({post} : any) => {
               <Textarea isDisabled placeholder='Log in or sign up to comment' />
               {post.comments.map((comment : any, index : number) => {
                 return (
-                <CommentContainer>
+                <CommentContainer key={'comment-' + comment.id}>
                   {index === 0 ? null : <Divider/>}
                   <Description>
                     {comment.description}

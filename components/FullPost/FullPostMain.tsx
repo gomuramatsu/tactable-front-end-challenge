@@ -26,7 +26,7 @@ const FullPostMain = () => {
     if (data) {
       setPosts(data);
     }
-  }, [data]);
+  }, [data, setPosts]);
   
   useEffect(() => {
     if (posts) {
@@ -36,7 +36,7 @@ const FullPostMain = () => {
         }
       }
     }
-  }, [posts]);
+  }, [posts, setPosts, router.query.postId]);
 
   return (
     <>

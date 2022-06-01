@@ -25,7 +25,7 @@ const Content = () => {
       setPosts(data);
       setPage(0);
     }
-  }, [data]);
+  }, [data, setPage, setPosts]);
 
   return (
     <ContentContainer>

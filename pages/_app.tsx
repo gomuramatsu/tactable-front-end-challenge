@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient} contextSharing={true}>
         <GlobalContext.Provider value={{ posts, setPosts, page, setPage }}>
           <Container>
             <Component {...pageProps} />

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { useGlobalContext } from  '../utils/state/Context'
+import {createMemoryHistory} from 'history'
 
 const PaginationContainer = styled.div`
   margin: 36px 0 24px 0;
