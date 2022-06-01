@@ -1,6 +1,7 @@
 import { render, screen , fireEvent, cleanup, waitFor} from '@testing-library/react'
 import Home from '../pages/index'
 import Navbar from '../components/Navbar'
+import FullPost from '../components/FullPost/FullPost'
 import '@testing-library/jest-dom'
 import {
   QueryClient,
@@ -8,11 +9,13 @@ import {
 } from 'react-query'
 
 describe('Home', () => {
-  it('renders home page elements - navbar, footer', () => {
+  it('Render home page elements - navbar, footer', () => {
     const queryClient = new QueryClient();
-    render(<QueryClientProvider client={queryClient}>
-      <Home />
-    </QueryClientProvider>)
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Home />
+      </QueryClientProvider>
+    );
 
     const navbarLogo = screen.getByRole('img', {
       src: /logo.png/i,
@@ -25,5 +28,16 @@ describe('Home', () => {
     })
 
     expect(heading).toBeInTheDocument()
+  })
+})
+
+describe('Post Page', () => {
+  it('Render post', () => {
+    const queryClient = new QueryClient();
+    render(
+      <QueryClientProvider client={queryClient}>
+        <FullPost />
+      </QueryClientProvider>
+    );
   })
 })

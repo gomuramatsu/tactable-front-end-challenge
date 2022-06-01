@@ -8,6 +8,7 @@ import { fetchPosts } from '../../utils/api/posts'
 import { useGlobalContext } from  '../../utils/state/Context'
 import FullPost from './FullPost'
 import Comments from './Comments'
+import { Post, Author } from '../../utils/types/post'
 
 const MainContainer = styled.div`
   margin: 20px 15% 20px 15%;
@@ -18,7 +19,7 @@ const FullPostMain = () => {
   const router = useRouter();
 
   const { posts, setPosts } = useGlobalContext();
-  const [post, setPost] = useState<any>(null);
+  const [post, setPost] = useState<Post | null>(null);
 
   const { data, status } = useQuery('fetchPosts', fetchPosts);
 

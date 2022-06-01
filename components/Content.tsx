@@ -9,6 +9,7 @@ import { useGlobalContext } from  '../utils/state/Context'
 import Pagination from './Pagination'
 import FullPost from './FullPost/FullPost'
 import Link from 'next/link'
+import { Post, Comment } from '../../utils/types/post'
 
 const ContentContainer = styled.div`
   flex: 1;
@@ -40,14 +41,18 @@ const Content = () => {
       {status === 'success' && (
         <>
           <Stack direction='column'>
-            {posts && posts.map((post:any, index: number) => {
+            {posts && posts.map(( post: Post, index: number ) => {
               if ( index >= page * 5 && index < (page + 1) * 5) {
-                return <Link href={"/" + post.id} key={post.id}>
-                <a><FullPost
-                  key={post.id}
-                  post={post}
-                />
-                </a></Link>
+                return (
+                <Link href={"/" + post.id} key={post.id}>
+                  <a>
+                    <FullPost
+                      key={post.id}
+                      post={post}
+                    />
+                  </a>
+                </Link>
+                );
               }
             })}
           </Stack>

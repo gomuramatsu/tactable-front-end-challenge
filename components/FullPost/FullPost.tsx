@@ -1,5 +1,6 @@
 import { Heading, propNames, Text } from '@chakra-ui/react'
 import styled from 'styled-components'
+import { Post, Author } from '../../utils/types/post'
 
 const PostContainer = styled.div`
   border-radius: 6px;
@@ -23,7 +24,6 @@ const AuthorImage = styled.img`
 const AuthorListContainer = styled.div`
   display: flex;
   flex-direction: row;
-
 `;
 
 const AuthorContainer = styled.div`
@@ -33,14 +33,15 @@ const AuthorContainer = styled.div`
   align-items: center;
 `;
 
-const FullPost = ({post} : any) => {
+
+const FullPost = (props: { post: Post | null }) => {
   return (
     <>
-      {post ? 
+      {props.post ? 
         <PostContainer>
-          <Heading fontSize='xl'>{post.title}</Heading>
+          <Heading fontSize='xl'>{props.post.title}</Heading>
           <AuthorListContainer>
-          {post.authors.map((author : any) => {
+          {props.post.authors.map((author : Author) => {
             return (
               <AuthorContainer key={author.id}>
                 <AuthorImage src={author.avatar} />
@@ -49,12 +50,12 @@ const FullPost = ({post} : any) => {
             );
           })}
           </AuthorListContainer>
-          {'' + new Date(post.createdAt).toLocaleDateString("en-US")}
-          <Text mt={4}>{post.description}</Text>
+          {'' + new Date(props.post.createdAt).toLocaleDateString("en-US")}
+          <Text mt={4}>{props.post.description}</Text>
           <Text mt={1} color='gray.500'>
-            {post.comments ? 
+            {props.post.comments ? 
               <>{
-                post.comments.length + (post.comments.length === 1 ? ' comment' : ' comments')
+                props.post.comments.length + (props.post.comments.length === 1 ? ' comment' : ' comments')
               }</> 
               : '0 Comments'
             }

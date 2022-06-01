@@ -1,5 +1,6 @@
 import { Textarea, Text } from '@chakra-ui/react'
 import styled from 'styled-components'
+import { Post, Comment } from '../../utils/types/post'
 
 const CommentContainers = styled.div`
   border-radius: 6px;
@@ -21,15 +22,15 @@ const Divider = styled.div`
   margin: 16px 5% 16px 5%;
 `;
 
-const Comments = ({post} : any) => {
+const Comments = (props: { post: Post | null }) => {
   return (
     <>
-      {post ? 
+      {props.post ? 
         <CommentContainers>
-          { post && post.comments ? 
+          { props.post && props.post.comments ? 
             <>
               <Textarea isDisabled placeholder='Log in or sign up to comment' />
-              {post.comments.map((comment : any, index : number) => {
+              {props.post.comments.map((comment : Comment, index : number) => {
                 return (
                 <CommentContainer key={'comment-' + comment.id}>
                   {index === 0 ? null : <Divider/>}
